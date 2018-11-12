@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from './components/AppBar';
-import TripFinder from './components/TripFinder';
-
+import TripFinder from './container/TripFinder';
+import MuiPickersUtilsProvider from 'material-ui-pickers/MuiPickersUtilsProvider';
+import DateFnsUtils from 'material-ui-pickers/utils/date-fns-utils';
 
 const styles = theme => ({
   root: {
@@ -17,10 +18,12 @@ class App extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <div className={classes.root}>
-        <AppBar/>
-        <TripFinder/>
-      </div>
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <div className={classes.root}>
+          <AppBar/>
+          <TripFinder/>
+        </div>
+      </MuiPickersUtilsProvider>
     );
   }
 }

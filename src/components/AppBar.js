@@ -5,9 +5,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import Hidden from '@material-ui/core/Hidden';
+import AppBarMenu from '../container/AppBarMenu'
 
 const styles = theme => ({
   root: {
@@ -19,6 +18,9 @@ const styles = theme => ({
   grow: {
     flexGrow: 1,
   },
+  button:{
+    marginLeft:'10px',
+  }
 });
 
 class MenuAppBar extends React.Component {
@@ -35,16 +37,14 @@ class MenuAppBar extends React.Component {
                 </Typography>
 
                 <Hidden smDown>
-                  <Button color="inherit">Home</Button>
-                  <Button color="inherit">About</Button>
-                  <Button color="inherit">Trip Planner</Button>
-                  <Button color="inherit">Contact</Button>
-                  <Button color="inherit" variant="outlined">Sign In</Button>
+                  <Button className={classes.button} color="inherit">Home</Button>
+                  <Button className={classes.button} color="inherit">About</Button>
+                  <Button className={classes.button} color="inherit">Trip Planner</Button>
+                  <Button className={classes.button} color="inherit">Contact</Button>
+                  <Button className={classes.button} color="primary" variant="contained">Sign In</Button>
                 </Hidden>
                 <Hidden mdUp>
-                <IconButton color="inherit" aria-label="Menu">
-                  <MenuIcon />
-                </IconButton>
+                  <AppBarMenu/>
                 </Hidden>
 
             </Toolbar>

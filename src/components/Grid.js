@@ -40,9 +40,7 @@ class DriversGrid extends React.Component {
             <div className={classes.toolbar} />
             <Scrollbars 
               autoHide
-              // Hide delay in ms
               autoHideTimeout={500}
-              // Duration for hide animation in ms.
               autoHideDuration={200}
             >
             <div className={classes.gridWrapper}>

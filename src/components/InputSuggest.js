@@ -7,43 +7,6 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 
-const suggestions = [
-  { label: 'Afghanistan' },
-  { label: 'Aland Islands' },
-  { label: 'Albania' },
-  { label: 'Algeria' },
-  { label: 'American Samoa' },
-  { label: 'Andorra' },
-  { label: 'Angola' },
-  { label: 'Anguilla' },
-  { label: 'Antarctica' },
-  { label: 'Antigua and Barbuda' },
-  { label: 'Argentina' },
-  { label: 'Armenia' },
-  { label: 'Aruba' },
-  { label: 'Australia' },
-  { label: 'Austria' },
-  { label: 'Azerbaijan' },
-  { label: 'Bahamas' },
-  { label: 'Bahrain' },
-  { label: 'Bangladesh' },
-  { label: 'Barbados' },
-  { label: 'Belarus' },
-  { label: 'Belgium' },
-  { label: 'Belize' },
-  { label: 'Benin' },
-  { label: 'Bermuda' },
-  { label: 'Bhutan' },
-  { label: 'Bolivia, Plurinational State of' },
-  { label: 'Bonaire, Sint Eustatius and Saba' },
-  { label: 'Bosnia and Herzegovina' },
-  { label: 'Botswana' },
-  { label: 'Bouvet Island' },
-  { label: 'Brazil' },
-  { label: 'British Indian Ocean Territory' },
-  { label: 'Brunei Darussalam' },
-];
-
 function renderInput(inputProps) {
   const { InputProps, classes, ref, ...other } = inputProps;
 
@@ -90,7 +53,7 @@ renderSuggestion.propTypes = {
   suggestion: PropTypes.shape({ label: PropTypes.string }).isRequired,
 };
 
-function getSuggestions(value) {
+function getSuggestions(value,suggestions) {
   const inputValue = deburr(value.trim()).toLowerCase();
   const inputLength = inputValue.length;
   let count = 0;
@@ -116,6 +79,7 @@ const styles = theme => ({
     display:'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    width: '100%',
   },
   underline: {
     '&:before': {
@@ -139,7 +103,7 @@ const styles = theme => ({
   },
   paper: {
     position: 'absolute',
-    zIndex: 1,
+    zIndex: 2,
     marginTop: '0',
     left: 0,
     right: 0,
@@ -147,12 +111,22 @@ const styles = theme => ({
   textfield: {
     height: '100%',
   },
+  inputLabel:{
+    position: 'absolute',
+    left: '80px',
+    fontSize: '1rem',
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontWeight: '400',
+    lineHeight: '1.75',
+    letterSpacing: '0.00938em',
+    top: '11px',
+  },
   inputRoot: {
     flexWrap: 'wrap',
-    color:'white',
+    color:'rgba(255,255,255,0.65)',
     flexGrow: '2',
     fontSize: '14px',
-    paddingLeft: '20%',
+    paddingLeft: '80px',
     height:'100%',
     width:'100%',
     boxSizing: 'border-box',
@@ -160,8 +134,8 @@ const styles = theme => ({
   },
   inputInput: {
     width: '100%',
-    height: '100%',
     cursor: 'pointer !important',
+    padding:'28px 0 0 0',
   },
   divider: {
    
@@ -169,7 +143,7 @@ const styles = theme => ({
 });
 
 function InputSuggest(props) {
-  const { classes } = props;
+  const { classes, placeholder, suggestions, name} = props;
 
   return (
     <div className={classes.root}>
@@ -184,17 +158,18 @@ function InputSuggest(props) {
           selectedItem,
         }) => (
           <div className={classes.container}>
+            <label className={classes.inputLabel}>{name}</label>
             {renderInput({
               fullWidth: true,
               classes,
               InputProps: getInputProps({
-                placeholder: 'Select the place',
+                placeholder: placeholder,
               }),
             })}
             <div {...getMenuProps()}>
               {isOpen ? (
                 <Paper className={classes.paper} square>
-                  {getSuggestions(inputValue).map((suggestion, index) =>
+                  {getSuggestions(inputValue,suggestions).map((suggestion, index) =>
                     renderSuggestion({
                       suggestion,
                       index,
