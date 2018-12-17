@@ -45,7 +45,7 @@ class DriversGrid extends React.Component {
             >
             <div className={classes.gridWrapper}>
             <Grid container className={classes.grid} spacing={16}>
-                {[1,2,3,4,5,6,7,8,9,10,11,12].map((index) => 
+                {[1,2,3,4,5,6,7,8,9,10,11,12,13].map((index) => 
                     <Grid item key={index} xs={12} sm={6} lg={4}>
                     <Card/>
                     </Grid>

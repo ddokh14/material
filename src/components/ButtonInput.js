@@ -1,5 +1,4 @@
 import React from 'react';
-import ButtonBase from '@material-ui/core/ButtonBase';
 import { withStyles } from '@material-ui/core/styles';
 import InputSuggest from './InputSuggest'; // MaterialUI Component
 import TripOrigin from '@material-ui/icons/TripOrigin';
@@ -8,6 +7,7 @@ import Place from '@material-ui/icons/Place';
 import AddLocation from '@material-ui/icons/AddLocation';
 import Delete from '@material-ui/icons/Clear';
 import classnames from 'classnames';
+import IconButton from '@material-ui/core/IconButton';
 
 const styles = theme => ({
   inputWithIcon:{
@@ -58,25 +58,25 @@ class ButtonInput extends React.Component {
     const { classes, last, del, placeholder, suggestions, onClick, id, name} = this.props;
 
     return (     
-        <ButtonBase className={classes.inputWithIcon}>
+        <div className={classes.inputWithIcon}>
             { last ? 
               <React.Fragment>
                 <Place className={classes.icon}/>
-                <AddLocation onClick={onClick} className={classes.optionIcon} color="inherit"/>
+                <IconButton onClick={onClick}  className={classes.optionIcon} color="inherit"><AddLocation/></IconButton>
               </React.Fragment> 
             :
               <React.Fragment>
                   <TripOrigin className={classnames({[classes.icon] : true, [classes.smallIcon]: true})}/>
                   <MoreVert className={classes.pathIcon}/>
                   { del ? 
-                    <Delete id={id} onClick={onClick} className={classes.optionIcon} color="inherit"/>
+                    <IconButton id={id} onClick={onClick} className={classes.optionIcon} color="inherit"><Delete/></IconButton>
                   :
                     null
                   }
               </React.Fragment>
             }
             <InputSuggest name={name} placeholder={placeholder} suggestions={suggestions}/>
-        </ButtonBase>
+        </div>
     );
   }
 }

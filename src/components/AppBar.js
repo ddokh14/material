@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Hidden from '@material-ui/core/Hidden';
 import AppBarMenu from '../container/AppBarMenu'
+import UserPopup from './UserPopup'
+
 
 const styles = theme => ({
   root: {
@@ -24,6 +26,23 @@ const styles = theme => ({
 });
 
 class MenuAppBar extends React.Component {
+    state = {
+      open: false,
+      isRegister: false,
+    };
+
+    handleOpen = () => {
+      this.setState({ open: true });
+    };
+
+    handleToggleRegister = () => {
+      this.setState({ isRegister: !this.state.isRegister });
+    };
+
+
+    handleClose = () => {
+      this.setState({ open: false });
+    };
 
     render() {
     const { classes } = this.props;
@@ -41,13 +60,15 @@ class MenuAppBar extends React.Component {
                   <Button className={classes.button} color="inherit">About</Button>
                   <Button className={classes.button} color="inherit">Trip Planner</Button>
                   <Button className={classes.button} color="inherit">Contact</Button>
-                  <Button className={classes.button} color="primary" variant="contained">Sign In</Button>
+                  <Button className={classes.button} onClick={this.handleOpen} color="primary" variant="contained">Sign In</Button>
                 </Hidden>
                 <Hidden mdUp>
                   <AppBarMenu/>
                 </Hidden>
 
             </Toolbar>
+
+            <UserPopup onClose={this.handleClose} open={this.state.open} isRegister={this.state.isRegister} toggleRegister={this.handleToggleRegister} title="Sign In"/>
         </AppBar>
     );
   }
