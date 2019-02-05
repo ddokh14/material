@@ -91,7 +91,7 @@ const customStyles = {
 }
 
 
-const styles = theme => ({
+const styles= () => ({
   inputLabel:{
     position: 'absolute',
     left: '80px',
